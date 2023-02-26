@@ -54,11 +54,11 @@ class InstallDependencies(bpy.types.Operator):
             if access:
                 print ("installing to site-packages")
                 # install librosa to site-packages
-                subprocess.call([python_exe, "-m", "pip", "install", "--target=%s"%(site_packages), "librosa"])
+                subprocess.call([python_exe, "-m", "pip", "install", "--target=%s"%(site_packages), "librosa==0.9.2"])
             else:
                 print ("installing to user directory")
                 # install librosa to user directory
-                subprocess.call([python_exe, "-m", "pip", "install", "librosa"])
+                subprocess.call([python_exe, "-m", "pip", "install", "librosa==0.9.2"])
 
             return {'FINISHED'}
         except Exception as e:
