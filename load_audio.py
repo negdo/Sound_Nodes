@@ -15,8 +15,6 @@ class LoadAudio(bpy.types.Operator, ImportHelper):
     )
     
     def execute(self, context):
-        #filepath = self.filepath
-        directory = str(os.path.dirname(self.filepath))
         filename = str(os.path.basename(self.filepath))
 
         # save to scene properties
@@ -32,7 +30,8 @@ class LoadAudio(bpy.types.Operator, ImportHelper):
                 context.scene.sequence_editor.sequences.remove(seq)
 
         # add audio to scene
-        context.scene.sequence_editor.sequences.new_sound(name=filename + " - sound nodes", filepath=self.filepath, frame_start=1, channel=4)
+        new_name = filename[:40] + " - sound nodes"
+        context.scene.sequence_editor.sequences.new_sound(name=new_name, filepath=self.filepath, frame_start=1, channel=4)
 
         # set audio sync mode
         context.scene.sync_mode = 'AUDIO_SYNC'

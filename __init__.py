@@ -22,7 +22,7 @@ bl_info = {
     "name": "Sound Nodes",
     "description": "Visualize sound in Blender with Geometry Nodes",
     "author": "Miha Marinko",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (3, 4, 0),
     "location": "Geometry Nodes",
     "warning": "",
