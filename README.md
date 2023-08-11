@@ -2,10 +2,10 @@
 <img width="600" alt="detectAsset 10@2x bak (Custom)" src="https://user-images.githubusercontent.com/18052453/218277109-d2e4d4c2-13d3-465e-a575-21c8d38d9281.png">
 
 
-# Sound_Nodes
+# Sound Nodes Lite
 Unleash the power of sound in your Blender animations with Sound Nodes! Easily analyze audio, harness its features in Geometry Nodes, and create stunning audio-visual masterpieces.
 
-This repository contains Lite version of the addon with limited features. To get all functionality consider purchasing Sound Nodes at Blender Market
+ > This repository contains Lite version of the addon with limited features. To get all functionality consider purchasing Sound Nodes at Blender Market
 https://blendermarket.com/products/sound-nodes
 
 # Sound Nodes Documentation
