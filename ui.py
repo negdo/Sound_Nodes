@@ -33,10 +33,8 @@ class SOUNDNODES_PT_AdvancedPanel(bpy.types.Panel):
 
         layout = self.layout
 
-        layout.label(text="To access all features")
-        layout.label(text="of Sound Nodes")
-        layout.label(text="please consider purchasing")
-        layout.label(text="the full version addon.")
+        layout.label(text="A fork of Sound Nodes addon.")
+        layout.label(text="Consider buying the original version here:")
         layout.label(text="https://blendermarket.com/products/sound-nodes")
 
         box0 = layout.box()
