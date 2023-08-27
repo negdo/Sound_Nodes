@@ -16,8 +16,8 @@ class Preferences(bpy.types.AddonPreferences):
  
     def draw(self, context):
         layout = self.layout
-        layout.label(text='This is Lite version of Sound Nodes addon.')
-        layout.label(text='To access all features of Sound Nodes please consider purchasing the full version addon.')
+        layout.label(text="A fork of Sound Nodes addon.")
+        layout.label(text="Consider buying the original version here:")
         layout.label(text='https://blendermarket.com/products/sound-nodes')
         layout.label(text=' ')
         layout.label(text='For addon to work we need to install librosa python library:')
