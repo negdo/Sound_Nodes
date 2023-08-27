@@ -32,13 +32,14 @@ bl_info = {
 
 import importlib
 import sys
+
 import bpy
 
-from .preferences import *
-from .ui import *
-from .properties import *
-from .load_audio import *
 from .compute import RunAnalysis
+from .load_audio import *
+from .preferences import *
+from .properties import *
+from .ui import *
 
 
 def register():

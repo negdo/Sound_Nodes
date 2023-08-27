@@ -1,5 +1,6 @@
 import bpy
 
+
 class SOUNDNODES_PT_Panel(bpy.types.Panel):
     bl_idname = "SOUNDNODES_PT_Panel"
     bl_label = "Sound Nodes"

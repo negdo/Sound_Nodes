@@ -1,7 +1,9 @@
+import os
+
 import bpy
 from bpy.props import StringProperty
 from bpy_extras.io_utils import ImportHelper
-import os
+
 
 class LoadAudio(bpy.types.Operator, ImportHelper):
     bl_idname = "sound_nodes.load_audio"

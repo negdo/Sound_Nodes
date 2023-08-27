@@ -1,7 +1,6 @@
 # Get usefull data from the sound file
 
 from .generate_nodes import *
-import time
 
 # y - amplitude
 # sr - sample rate
@@ -28,6 +27,7 @@ def clean_animation(context):
 
 
 import bpy
+
 
 class RunAnalysis(bpy.types.Operator):
     bl_idname = "sound_nodes.run_analysis"
