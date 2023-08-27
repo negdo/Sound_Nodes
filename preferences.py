@@ -1,7 +1,9 @@
-import bpy
-import subprocess
 import os
+import subprocess
 import sys
+
+import bpy
+
 
 class Preferences(bpy.types.AddonPreferences):
     bl_idname = __package__

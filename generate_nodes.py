@@ -1,5 +1,6 @@
 import bpy
 
+
 def set_driver(node, path):
     # add new driver
     driver = node.outputs[0].driver_add("default_value")

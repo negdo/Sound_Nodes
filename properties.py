@@ -1,5 +1,6 @@
 import bpy
 
+
 class SoundNodesPropertyGroup(bpy.types.PropertyGroup):
     audio_source: bpy.props.StringProperty(
         description="Path to audio file",
