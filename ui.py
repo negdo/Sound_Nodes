@@ -43,28 +43,23 @@ class SOUNDNODES_PT_AdvancedPanel(bpy.types.Panel):
 
         box1 = layout.box()
         box1.label(text="Loudness:")
-        box1.prop(properties, "loudness_smoothing", text="Smoothing factor")
-        box1.prop(properties, "loudness_normalization", text="Normalize")
-        box1.enabled = False
+        box1.prop(propeties, "loudness_smoothing", text="Smoothing factor")
+        box1.prop(propeties, "loudness_normalization", text="Normalize")
 
         box2 = layout.box()
         box2.label(text="Average Frequency:")
-        box2.prop(properties, "avg_freq_smoothing", text="Smoothing factor")
-        box2.enabled = False
+        box2.prop(propeties, "avg_freq_smoothing", text="Smoothing factor")
 
         box3 = layout.box()
         box3.label(text="Beats:")
-        box3.prop(properties, "estimated_tempo", text="Estimated tempo")
-        box3.enabled = False
+        box3.prop(propeties, "estimated_tempo", text="Estimated tempo")
 
         box4 = layout.box()
         box4.label(text="Spectrogram:")
-        box4.prop(properties, "spect_bins", text="Number of bins")
-        box4.prop(properties, "spect_smoothing", text="Smoothing factor")
-        box4.prop(properties, "spectrogram_normalization", text="Normalize")
-        box4.enabled = False
+        box4.prop(propeties, "spect_bins", text="Number of bins")
+        box4.prop(propeties, "spect_smoothing", text="Smoothing factor")
+        box4.prop(propeties, "spectrogram_normalization", text="Normalize")
 
         box5 = layout.box()
         box5.label(text="Chromagram:")
-        box5.prop(properties, "chroma_smoothing", text="Smoothing factor")
-        box5.enabled = False
+        box5.prop(propeties, "chroma_smoothing", text="Smoothing factor")
