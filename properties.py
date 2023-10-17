@@ -15,16 +15,35 @@ class SoundNodesPropertyGroup(bpy.types.PropertyGroup):
         max=1.0
     )
 
+    beats_raw: bpy.props.IntProperty(
+        description="Frames where beats occur",
+        default=0,
+        min=0,
+        max=1
+    )
+
+    beats_triangle: bpy.props.FloatProperty(
+        description="Triangle wave based on beats",
+        default=0.0,
+        min=0.0,
+        max=1.0
+    )
+    
+    beat_pulse_width: bpy.props.FloatProperty(
+        description="The width of the beat pulse",
+        default=2.0,
+    )
+
     spectrogram1: bpy.props.FloatVectorProperty(
         description="Spectrogram of audio",
         size=32,
-        default=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        default=(0.0,)*32
     )
 
     spectrogram2: bpy.props.FloatVectorProperty(
         description="Spectrogram of audio",
         size=32,
-        default=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        default=(0.0,)*32
     )
 
     spect_bins: bpy.props.IntProperty(

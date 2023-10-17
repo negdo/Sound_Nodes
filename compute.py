@@ -1,5 +1,9 @@
 # Get usefull data from the sound file
 
+import bpy
+import librosa
+import numpy as np
+
 from .generate_nodes import *
 
 # y - amplitude
@@ -26,9 +30,6 @@ def clean_animation(context):
         pass
 
 
-import bpy
-
-
 class RunAnalysis(bpy.types.Operator):
     bl_idname = "sound_nodes.run_analysis"
     bl_label = "Analyze Audio"
@@ -49,12 +50,6 @@ class RunAnalysis(bpy.types.Operator):
         if properties.audio_source == "":
             self.report({'ERROR'}, "No audio file selected")
             return {'CANCELLED'}
-
-
-        global librosa
-        import librosa
-        global np
-        import numpy as np
 
         y, sr = librosa.load(properties.audio_source)
 
@@ -87,23 +82,62 @@ class RunAnalysis(bpy.types.Operator):
         if properties.spectrogram_normalization:
             spectrogram /= np.amax(spectrogram)
 
-        n_bins = spectrogram.shape[0]
+        num_frequency_bins = spectrogram.shape[0]
 
         for i in range(spectrogram.shape[1]):
             array = spectrogram[:, i]
-            array = np.pad(array, (0, 32-n_bins), mode='constant', constant_values=(0, 0))
+            array = np.pad(array, (0, 32-num_frequency_bins), mode='constant', constant_values=(0, 0))
 
             properties.spectrogram1 = array
             properties.keyframe_insert(data_path="spectrogram1", frame=i*properties.spect_smoothing+offset, group="Sound Nodes")
 
+        tempo, beat_frames = librosa.beat.beat_track(y=y, sr=sr)
+        beat_times = librosa.frames_to_time(beat_frames, sr=sr) 
+        beat_frame_numbers = [round(time * fps) for time in beat_times]
+        beat_pulse_width = properties.beat_pulse_width 
+
+        for beat_frame in beat_frame_numbers:
+            start_pulse = beat_frame - beat_pulse_width // 2
+            end_pulse = beat_frame + beat_pulse_width // 2
+
+            # Set 0 just before the onset
+            properties.beats_raw = 0
+            properties.keyframe_insert(data_path="beats_raw", frame=start_pulse-1, group="Sound Nodes")
+            
+            properties.beats_triangle = 0
+            properties.keyframe_insert(data_path="beats_triangle", frame=start_pulse-1, group="Sound Nodes")
+
+            # Set 1 at the onset and offset
+            properties.beats_raw = 1
+            properties.keyframe_insert(data_path="beats_raw", frame=start_pulse, group="Sound Nodes")
+            properties.keyframe_insert(data_path="beats_raw", frame=end_pulse, group="Sound Nodes")
+
+            # For triangle waves set at center
+            properties.beats_triangle = 1
+            properties.keyframe_insert(data_path="beats_triangle", frame=beat_frame, group="Sound Nodes")
+
+            # Set 0 just after the offset
+            properties.beats_raw = 0
+            properties.keyframe_insert(data_path="beats_raw", frame=end_pulse+1, group="Sound Nodes")
+            
+            properties.beats_triangle = 0
+            properties.keyframe_insert(data_path="beats_triangle", frame=end_pulse+1, group="Sound Nodes")
+
+
+        # TODO
+        # average_frequency = np.mean(librosa.core.fft_frequencies(sr=sr))
+        # beats_triangle = librosa.util.frame(beats_raw, frame_length=sr//fps, hop_length=sr//fps).T
 
         wm.progress_update(90)
 
         # generate / refresh nodes
-        generate_sound_basic()
+        generate_loudness_group()
+        generate_avg_freq()
+        generate_beats_raw()
+        generate_beats_triangle()
         generate_chromagram()
-        generate_spectrogram(n_bins)
-        generate_spectrogram_v2(n_bins)
+        generate_spectrogram(num_frequency_bins)
+        generate_spectrogram_v2(num_frequency_bins)
 
         wm.progress_end()
 
